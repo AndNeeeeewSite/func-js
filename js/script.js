@@ -13,113 +13,70 @@ logItems(['Mango', 'Poly', 'Ajax', 'Lux', 'Jay', 'Kong']);
 logItems([5, 10, 15, 20, 25, 30, 35, 40, 45, 50]);
 //                    2.
 
+ 
+const calculateEngravingPrice = function(message, pricePerWord=0) {
+  var messageArray = message.split(' ');
+  total = messageArray.length * pricePerWord
+  return '2. ' + total
+}
+console.log(
+  calculateEngravingPrice(
+    'Proin sociis natoque et magnis parturient montes mus',
+    10,
+  ),
+); // 80
 
-const calculateEngravingPrice = function (message, pricePerWord=0) {
-    let leterCounter = 0
-    let LastLetter = 0
-    let wordCounter = 0
-    let total = 0
-    for (let messageArray of message) {
-       isLetter =  messageArray.toLowerCase() !== messageArray.toUpperCase();
-       if(LastLetter >= 1 && isLetter == true){
-        LastLetter++
-       }
-       else{
-        LastLetter = 0
-       }
-       if(LastLetter == 0 && isLetter == true){
-        LastLetter++ 
-        wordCounter++
-       }
-    }
-    total = wordCounter * pricePerWord
-    return '2. '+ total
-  };
-  console.log(
-    calculateEngravingPrice(
-      'Proin sociis natoque et magnis parturient montes mus',
-      10,
-    ),
-  ); // 80 
-  
-  console.log(
-    calculateEngravingPrice(
-      'Proin sociis natoque et magnis parturient montes mus',
-      20,
-    ),
-  ); // 160
-  
-  console.log(
-    calculateEngravingPrice('Donec orci lectus aliquam est magnis', 40),
-  ); // 240
-  
-  console.log(
-    calculateEngravingPrice('Donec orci lectus aliquam est magnis', 20),
-  ); // 120
+console.log(
+  calculateEngravingPrice(
+    'Proin sociis natoque et magnis parturient montes mus',
+    20,
+  ),
+); // 160
+
+console.log(
+  calculateEngravingPrice('Donec orci lectus aliquam est magnis', 40),
+); // 240
+
+console.log(
+  calculateEngravingPrice('Donec orci lectus aliquam est magnis', 20),
+); // 120
   //                 3.
 
 
   console.log('')
   const findLongestWord = function (string) {
-    let leterCounter = 0
-    let LastLetter = 0
-    let wordCounter = 0
-    biggestWord = 0
-    nowWord = ''
-    biggestWordNotNum = ''
-    for (let messageArray of string) {
-       isLetter =  messageArray.toLowerCase() !== messageArray.toUpperCase();
-       if(LastLetter >= 0 && isLetter == true){
-        LastLetter++
-        nowWord = nowWord+ messageArray
-        if(biggestWord<LastLetter){
-            biggestWord = LastLetter
-            biggestWordNotNum = nowWord
-        }
-       }
-       else{
-        LastLetter = 0
-        nowWord = ''
-       }
-       if(LastLetter == 0 && isLetter == true){
-        LastLetter++ 
-        wordCounter++
-        nowWord = nowWord+ messageArray
-        
-       }
-
+    let biggestWordNumber = 0
+    let biggestWord 
+    var stringArray = string.split(' ');
+    for(elementStringArray of stringArray){
+      if(biggestWordNumber<elementStringArray.length){
+        biggestWordNumber = elementStringArray.length
+        biggestWord = elementStringArray
+      }
     }
-    return '3. ' + biggestWordNotNum
+    return '3. '+ biggestWord
   }
     console.log(findLongestWord('The quick brown fox jumped over the lazy dog')); // 'jumped'
     console.log(findLongestWord('Google do a roll')); // 'Google'
     console.log(findLongestWord('May the force be with you')); // 'force'   
 
-//                     4.
+//                     4. 
 console.log('')
 const formatString = function (string) {
-    let stringFinal = ''
-    let stringArrays = []
-    for(let stringArray of string){
-        stringArrays.push(stringArray)       
+  let  stringArrayFinal = ''
+  var stringArray = string.split('');
+  if (string.length >= 40){
+    for(let i= 40; i < stringArray.length;){
+      stringArray.pop()
     }
-    if(stringArrays.length >40){
-        while(stringArrays.length >40){
-            stringArrays.pop()
-        }
-        for(let stringArray of stringArrays){
-            stringFinal = stringFinal + stringArray
-        }
-        stringFinal = stringFinal + '...'
-    }
-    else{
-        for(let stringArray of stringArrays){
-            stringFinal = stringFinal + stringArray
-        }
-    }
-
-    return '4. ' +stringFinal
-
+  } 
+  for(let elementArray of stringArray){
+    stringArrayFinal = stringArrayFinal + elementArray
+  }
+  if (string.length >= 40){
+    stringArrayFinal = stringArrayFinal + '...'
+  } 
+  return '4. '+stringArrayFinal
   };
   console.log(formatString('Curabitur ligula sapien, tincidunt non.'));
   console.log(formatString('Vestibulum facilisis, purus nec pulvinar iaculis.'));
@@ -128,12 +85,12 @@ const formatString = function (string) {
     formatString(
       'Nunc sed turpis. Curabitur a felis in nunc fringilla tristique.',
     ),
-  );
+  ); 
   console.log('')
-//                     5.
+//                     5. 
 const checkForSpam = function (message) {
     let isSpam
-    if(  message.includes('spam') == true || message.includes('SPAM') == true || message.includes('sale') == true || message.includes('SALE') == true){
+    if(  message.includes('spam') || message.includes('SPAM') || message.includes('sale') || message.includes('SALE')){
         isSpam = true
     }
     else{
@@ -150,42 +107,21 @@ const checkForSpam = function (message) {
   
   console.log(checkForSpam('[SPAM] How to earn fast money?')); // true
   //                          6.
-    const numbers = [];
-    let total = 0;
-    k = 10
-    let input = prompt();
+
+let k = 10
+let numbers = []
+console.log(' ')
+while (k === 10) {
+  input = prompt()
+  if(input == null){
+    let total = 0
+    k = 0
+    for(elementNumbers of numbers){
+      total = total + Number.parseFloat(elementNumbers)
+    }
+    console.log('6. ' + total)
+  }
+  else{
     numbers.push(input)
-    if(input == null){
-        for (let numbersArray of numbers){
-            total = total + Number.parseFloat(numbersArray) 
-        }
-    }
-    else{    
-        let input = prompt()
-        numbers.push(input)
-        while(k == 10){
-            if(input == null){
-                k = 0
-                for (let numbersArray of numbers){
-                    
-                    total = total + Number.parseFloat(numbersArray) 
-                }
-            }
-            else{
-                
-                let input = prompt()
-                numbers.push(input)
-                if(input == null){
-                    k = 0
-                    numbers.pop()
-                    for (let numbersArray of numbers){
-                        total = total + Number.parseFloat(numbersArray) 
-                    }
-                }
-            }
-        }   
-    }
-    if(total == NaN){
-        total = 0
-    }
-    console.log(total)
+  }
+}
